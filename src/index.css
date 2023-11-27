@@ -82,25 +82,33 @@ html, body {
 }
 
 .input-section {
+  position: relative;
   flex: 1;
   padding: 20px;
   display: flex;
 }
 
 .input-section textarea {
-  width: calc(100% - 100px);
-  height: 100%;
+  width: calc(100% - 200px);
   padding: 10px;
   margin-right: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  font-size: 1em;
   resize: none; 
   text-align: left;
   vertical-align: top; 
   line-height: normal; 
   overflow: auto; 
 }
+
+.input-section input[type="text"] {
+  padding: 10px; 
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
 
 .input-section button {
   width: 80px;
@@ -125,16 +133,42 @@ html, body {
   overflow-y: auto; 
   font-size: 1em;
 }
-
-.input-section input[type="text"] {
-  height: 100%; 
-  text-align: left; 
-  vertical-align: top;
-}
-
 .output-section .output-content {
   height: 100%; 
   resize: none; 
+}
+
+.submit-container {
+
+  display: flex;
+  width: 150px;
+  flex-direction: column;
+  box-sizing: border-box;
+  align-items: flex-start;
+
+}
+
+.submit-btn {
+  padding: 0px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  width: 100%; 
+}
+
+
+
+
+.additional-arg {
+  height: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin-top: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%; 
 }
 
 

@@ -13,7 +13,7 @@ function App() {
     setInput(e.target.value)
   }
 
-// Submit the input to the selected function
+  // Submit the input to the selected function
   const handleSubmit = () => {
     if (!activeSubmenuClass) {
       console.error('No function has been selected.')
@@ -117,32 +117,36 @@ function App() {
         ))}
       </div>
       <div className='main-content'>
+
         <div className='input-section'>
           <textarea
             value={input}
             onChange={handleInputChange}
             placeholder='Enter your text here...'
           />
-          <button className='submit-btn' onClick={() => handleSubmit()}>
-            Submit
-          </button>
-          {activeSubmenuClass &&
-            functionArguments[activeSubmenuClass]
-              .slice(1)
-              .map(
-                (argType, index) =>
-                  argType !== 'string' && (
-                    <input
-                      key={`additional-arg-${index}`}
-                      type='text'
-                      value={args[index + 1]}
-                      onChange={(e) =>
-                        handleArgChange(index + 1, e.target.value)
-                      }
-                      placeholder={`Enter ${argType} here...`}
-                    />
-                  )
-              )}
+          <div className='submit-container'>
+            <button className='submit-btn' onClick={handleSubmit}>
+              Submit
+            </button>
+            {activeSubmenuClass &&
+              functionArguments[activeSubmenuClass]
+                .slice(1)
+                .map(
+                  (argType, index) =>
+                    argType !== 'string' && (
+                      <input
+                        className='additional-arg'
+                        key={`additional-arg-${index}`}
+                        type='text'
+                        value={args[index + 1] || ''}
+                        onChange={(e) =>
+                          handleArgChange(index + 1, e.target.value)
+                        }
+                        placeholder={`Enter ${argType} here...`}
+                      />
+                    )
+                )}
+          </div>
         </div>
         <div className='output-section'>
           <textarea
