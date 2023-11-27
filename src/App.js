@@ -1,58 +1,117 @@
 import React, { useState } from 'react'
-import './App.css'
 import * as StringManipulations from './library'
+import { functionArguments } from './FunctionArguments'
 
 function App() {
   const [input, setInput] = useState('')
   const [result, setResult] = useState('')
-  const [activeClass, setActiveClass] = useState('');
-  const [activeSubmenuClass, setActiveSubmenuClass] = useState('');
+  const [activeClass, setActiveClass] = useState('')
+  const [activeSubmenuClass, setActiveSubmenuClass] = useState('')
+  const [args, setArgs] = useState([])
 
   const handleInputChange = (e) => {
     setInput(e.target.value)
   }
 
+// Submit the input to the selected function
   const handleSubmit = () => {
+    if (!activeSubmenuClass) {
+      console.error('No function has been selected.')
+      return
+    }
     const instance = new StringManipulations[activeClass]()
-    const result = instance[activeSubmenuClass](input)
-    console.log(result)
-    setResult(result)
+
+    const argTypes = functionArguments[activeSubmenuClass]
+
+    // first argument is always the input
+    const methodArgs = [input]
+
+    argTypes.forEach((arg, index) => {
+      if (arg !== 'string' && arg !== 'length' && arg !== 'steps') {
+        methodArgs.push(args[index] || '') // Push the additionals arguments to the array
+      }
+      if (arg === 'length' || arg === 'steps') {
+        methodArgs.push(parseInt(args[index]) || 0) // Pass an int if the function takes that
+      }
+    })
+
+    // call the selected method with the prepared arguments
+    try {
+      const result = instance[activeSubmenuClass](...methodArgs)
+      setResult(result)
+    } catch (error) {
+      console.error(
+        'Error calling the function with the provided arguments:',
+        error
+      )
+    }
   }
 
+  // Toggle the active class of the sidebar buttons
+
   const toggleClass = (className) => {
-    setActiveClass(activeClass === className ? '' : className);
+    setActiveClass(activeClass === className ? '' : className)
+  }
 
-  };
+  // Toggle the active class of the submenu buttons
+  const toggleSubmenuClass = (method) => {
+    setActiveSubmenuClass(activeSubmenuClass === method ? '' : method)
+  }
 
-  const toggleSubmenuClass = (className, method) => {
-    setActiveSubmenuClass(activeSubmenuClass === method ? '' : method);
-  };
+  // set the arguments the function takes, from a predefined object
 
+  const handleFunctionSelection = (selectedMethod) => {
+    if (functionArguments.hasOwnProperty(selectedMethod)) {
+      setArgs(functionArguments[selectedMethod].map(() => ''))
+    } else {
+      setArgs([])
+    }
+  }
+
+  // handle the change of the additional arguments as the user inputs them
+
+  const handleArgChange = (index, newValue) => {
+    setArgs((prevArgs) => {
+      const newArgs = [...prevArgs]
+      newArgs[index] = newValue
+      return newArgs
+    })
+  }
 
   return (
     <div className='App'>
-      <div className="sidebar">
+      <div className='sidebar'>
         {Object.keys(StringManipulations).map((className) => (
           <div key={className}>
             <button
               onClick={() => toggleClass(className)}
-              className={`sidebar-btn ${activeClass === className ? 'active' : ''}`}
+              className={`sidebar-btn ${
+                activeClass === className ? 'active' : ''
+              }`}
             >
               {className}
             </button>
-            <div className={`submenu ${activeClass === className ? 'active' : ''}`}>
-              {Object.getOwnPropertyNames(StringManipulations[className].prototype)
-                .filter(method => method !== 'constructor')
+            <div
+              className={`submenu ${activeClass === className ? 'active' : ''}`}
+            >
+              {Object.getOwnPropertyNames(
+                StringManipulations[className].prototype
+              )
+                .filter((method) => method !== 'constructor')
                 .map((method) => (
                   <button
                     key={method}
-                    onClick={() => toggleSubmenuClass(className, method)}
-                    className={`submenu-btn ${activeSubmenuClass === method ? 'active' : ''}`}
+                    onClick={() => {
+                      toggleSubmenuClass(method)
+                      handleFunctionSelection(method)
+                    }}
+                    className={`submenu-btn ${
+                      activeSubmenuClass === method ? 'active' : ''
+                    }`}
                   >
                     {method}
                   </button>
-                ))
-              }
+                ))}
             </div>
           </div>
         ))}
@@ -64,7 +123,26 @@ function App() {
             onChange={handleInputChange}
             placeholder='Enter your text here...'
           />
-          <button onClick={() => handleSubmit()}>Submit</button>
+          <button className='submit-btn' onClick={() => handleSubmit()}>
+            Submit
+          </button>
+          {activeSubmenuClass &&
+            functionArguments[activeSubmenuClass]
+              .slice(1)
+              .map(
+                (argType, index) =>
+                  argType !== 'string' && (
+                    <input
+                      key={`additional-arg-${index}`}
+                      type='text'
+                      value={args[index + 1]}
+                      onChange={(e) =>
+                        handleArgChange(index + 1, e.target.value)
+                      }
+                      placeholder={`Enter ${argType} here...`}
+                    />
+                  )
+              )}
         </div>
         <div className='output-section'>
           <textarea
