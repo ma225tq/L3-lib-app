@@ -1,13 +1,147 @@
-body {
+html, body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#root {
+  height: 100%;
 }
+
+.App {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 250px; 
+  background-color: #f0f0f0; 
+  padding: 20px;
+}
+
+.sidebar button {
+  display: block;
+  background-color: #e9e9e9;
+  color: #333;
+  padding: 8px 16px;
+  text-align: left;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  text-transform: capitalize;
+  border-radius: 4px;
+  margin-bottom: 2px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.sidebar button:hover, .sidebar button:active {
+  background-color: #d0d0d0;
+}
+
+.sidebar button.active {
+  background-color: #bbb;
+  transform: translateX(10px);
+}
+
+
+.submenu {
+  display: none;
+  padding-left: 20px;
+}
+
+
+.submenu.active {
+  display: block;
+}
+
+.submenu button {
+  background-color: #e9e9e9;
+  color: #333;
+  padding: 8px 16px;
+  text-align: left;
+  border: none;
+  width: calc(100% - 20px); 
+  cursor: pointer;
+  text-transform: capitalize;
+  border-radius: 4px;
+  margin-bottom: 2px;
+}
+
+.submenu button:active {
+  background-color: #bbb;
+  transform: translateX(10px);
+}
+
+
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-section {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+}
+
+.input-section textarea {
+  width: calc(100% - 100px);
+  height: 100%;
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1em;
+  resize: none; 
+  text-align: left;
+  vertical-align: top; 
+  line-height: normal; 
+  overflow: auto; 
+}
+
+.input-section button {
+  width: 80px; 
+  padding: 10px;
+  margin-left: 10px; 
+}
+
+.output-section {
+  flex: 1; 
+  padding: 20px;
+  display: flex;
+}
+
+.output-section .output-content {
+  width: 100%;
+  background-color: #fff;
+  padding: 10px;
+  margin: 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow-y: auto; 
+  font-size: 1em;
+}
+
+.input-section input[type="text"] {
+  height: 100%; 
+  text-align: left; 
+  vertical-align: top;
+}
+
+.output-section .output-content {
+  height: 100%; 
+  resize: none; 
+}
+
+
+@media (max-width: 600px) {
+
+  
+  .input-section input[type="text"], .output-section .output-content {
+    margin-bottom: 10px;
+  }
+}
+
