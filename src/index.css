@@ -133,6 +133,7 @@ html, body {
   overflow-y: auto; 
   font-size: 1em;
 }
+
 .output-section .output-content {
   height: 100%; 
   resize: none; 
@@ -158,9 +159,6 @@ html, body {
   width: 100%; 
 }
 
-
-
-
 .additional-arg {
   height: 10px;
   padding: 10px;
@@ -170,7 +168,6 @@ html, body {
   cursor: pointer;
   width: 100%; 
 }
-
 
 @media (max-width: 600px) {
 

@@ -6,8 +6,8 @@ function App() {
   const [input, setInput] = useState('')
   const [result, setResult] = useState('')
   const [activeClass, setActiveClass] = useState('')
-  const [activeSubmenuClass, setActiveSubmenuClass] = useState('')
-  const [args, setArgs] = useState([])
+  const [activeSubMenuMethod, setActiveSubMenuMethod] = useState('')
+  const [args, setArguments] = useState([])
 
   const handleInputChange = (e) => {
     setInput(e.target.value)
@@ -16,29 +16,29 @@ function App() {
   // Submit the input to the selected function
   const handleSubmit = () => {
     try {
-      if (!activeSubmenuClass) {
-        console.error('No function has been selected.')
+      if (!activeSubMenuMethod) {
+        alert('No function has been selected.')
         return
       }
       const instance = new StringManipulations[activeClass]()
 
-      const argTypes = functionArguments[activeSubmenuClass]
+      const argumentTypes = functionArguments[activeSubMenuMethod]
 
       // first argument is always the input
-      const methodArgs = [input]
+      const methodArguments = [input]
 
-      argTypes.forEach((arg, index) => {
+      argumentTypes.forEach((arg, index) => {
         if (arg !== 'string' && arg !== 'length' && arg !== 'steps') {
-          methodArgs.push(args[index] || '') // Push the additionals arguments to the array
+          methodArguments.push(args[index] || '') // Push the additionals arguments to the array
         }
         if (arg === 'length' || arg === 'steps') {
-          methodArgs.push(parseInt(args[index]) || 0) // Pass an int if the function takes that
+          methodArguments.push(parseInt(args[index]) || 0) // Pass an int if the function takes that
         }
       })
 
       // call the selected method with the prepared arguments
       try {
-        const result = instance[activeSubmenuClass](...methodArgs)
+        const result = instance[activeSubMenuMethod](...methodArguments)
         setResult(result)
       } catch (error) {
         alert(error.message)
@@ -55,32 +55,32 @@ function App() {
   }
 
   // Toggle the active class of the submenu buttons
-  const toggleSubmenuClass = (method) => {
-    setActiveSubmenuClass(activeSubmenuClass === method ? '' : method)
+  const toggleSubMenuMethod = (method) => {
+    setActiveSubMenuMethod(activeSubMenuMethod === method ? '' : method)
   }
 
   // set the arguments the function takes, from a predefined object
 
-  const handleFunctionSelection = (selectedMethod) => {
+  const handleSubMenuMethodSelection = (selectedMethod) => {
     if (functionArguments.hasOwnProperty(selectedMethod)) {
-      setArgs(functionArguments[selectedMethod].map(() => ''))
+      setArguments(functionArguments[selectedMethod].map(() => ''))
     } else {
-      setArgs([])
+      setArguments([])
     }
   }
 
   // handle the change of the additional arguments as the user inputs them
 
-  const handleArgChange = (index, newValue) => {
-    setArgs((prevArgs) => {
+  const handleArgumentChange = (index, newValue) => {
+    setArguments((prevArgs) => {
       const newArgs = [...prevArgs]
       newArgs[index] = newValue
       return newArgs
     })
   }
 
-  function camelCaseToRegularCase(text) {
-    return text
+  function convertCamelCaseToRegular(string) {
+    return string
       .replace(/([A-Z])/g, ' $1')
       .replace(/^./, function (string) {
         return string.toUpperCase()
@@ -100,7 +100,7 @@ function App() {
                 activeClass === className ? 'active' : ''
               }`}
             >
-              {camelCaseToRegularCase(className)}
+              {convertCamelCaseToRegular(className)}
             </button>
             <div
               className={`submenu ${activeClass === className ? 'active' : ''}`}
@@ -113,14 +113,14 @@ function App() {
                   <button
                     key={method}
                     onClick={() => {
-                      toggleSubmenuClass(method)
-                      handleFunctionSelection(method)
+                      toggleSubMenuMethod(method)
+                      handleSubMenuMethodSelection(method)
                     }}
                     className={`submenu-btn ${
-                      activeSubmenuClass === method ? 'active' : ''
+                      activeSubMenuMethod === method ? 'active' : ''
                     }`}
                   >
-                    {camelCaseToRegularCase(method)}
+                    {convertCamelCaseToRegular(method)}
                   </button>
                 ))}
             </div>
@@ -138,8 +138,8 @@ function App() {
             <button className='submit-btn' onClick={handleSubmit}>
               Submit
             </button>
-            {activeSubmenuClass &&
-              functionArguments[activeSubmenuClass]
+            {activeSubMenuMethod &&
+              functionArguments[activeSubMenuMethod]
                 .slice(1)
                 .map(
                   (argType, index) =>
@@ -150,9 +150,9 @@ function App() {
                         type='text'
                         value={args[index + 1] || ''}
                         onChange={(e) =>
-                          handleArgChange(index + 1, e.target.value)
+                          handleArgumentChange(index + 1, e.target.value)
                         }
-                        placeholder={`Enter ${camelCaseToRegularCase(argType)}`}
+                        placeholder={`Enter ${convertCamelCaseToRegular(argType)}`}
                       />
                     )
                 )}
