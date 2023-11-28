@@ -10,14 +10,21 @@ export class Truncater {
 		if (length <= 0) {
 			throw new Error('Length must be a positive number');
 		}
-		if (length >= string.length) {
-			return string + '...';
-		}
 	
-		return string.slice(0, length) + '...';
+		let charCount = 0;
+        let truncatedString = '';
+
+        for (let char of string) {
+            if (charCount >= length) break;
+            truncatedString += char;
+            if (char !== ' ') charCount++;
+        }
+
+        return truncatedString.trimEnd() + '...';
+    }
 	}
 
-}
+
 
 
 
