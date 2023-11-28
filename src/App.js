@@ -15,36 +15,38 @@ function App() {
 
   // Submit the input to the selected function
   const handleSubmit = () => {
-    if (!activeSubmenuClass) {
-      console.error('No function has been selected.')
-      return
-    }
-    const instance = new StringManipulations[activeClass]()
-
-    const argTypes = functionArguments[activeSubmenuClass]
-
-    // first argument is always the input
-    const methodArgs = [input]
-
-    argTypes.forEach((arg, index) => {
-      if (arg !== 'string' && arg !== 'length' && arg !== 'steps') {
-        methodArgs.push(args[index] || '') // Push the additionals arguments to the array
-      }
-      if (arg === 'length' || arg === 'steps') {
-        methodArgs.push(parseInt(args[index]) || 0) // Pass an int if the function takes that
-      }
-    })
-
-    // call the selected method with the prepared arguments
     try {
-      const result = instance[activeSubmenuClass](...methodArgs)
-      setResult(result)
+      if (!activeSubmenuClass) {
+        console.error('No function has been selected.')
+        return
+      }
+      const instance = new StringManipulations[activeClass]()
+  
+      const argTypes = functionArguments[activeSubmenuClass]
+  
+      // first argument is always the input
+      const methodArgs = [input]
+  
+      argTypes.forEach((arg, index) => {
+        if (arg !== 'string' && arg !== 'length' && arg !== 'steps') {
+          methodArgs.push(args[index] || '') // Push the additionals arguments to the array
+        }
+        if (arg === 'length' || arg === 'steps') {
+          methodArgs.push(parseInt(args[index]) || 0) // Pass an int if the function takes that
+        }
+      })
+  
+      // call the selected method with the prepared arguments
+      try {
+        const result = instance[activeSubmenuClass](...methodArgs)
+        setResult(result)
+      } catch (error) {
+        alert(error.message);
+      }
     } catch (error) {
-      console.error(
-        'Error calling the function with the provided arguments:',
-        error
-      )
+      alert(error.message);
     }
+   
   }
 
   // Toggle the active class of the sidebar buttons
