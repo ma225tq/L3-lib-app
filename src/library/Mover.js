@@ -17,8 +17,11 @@ export class Mover {
 			throw new Error('Steps must be a positive number');
 		}
 	
-		if (typeof direction !== 'string') {
-			throw new Error('Direction must be a string');
+
+		direction = direction.toUpperCase();
+
+		if (direction !== 'L' && direction !== 'R') {
+			throw new Error('Direction must be either "L" or "R"');
 		}
 	
 		let result = string.split('');
@@ -30,22 +33,20 @@ export class Mover {
 			}
 		}
 	
-		if (direction === 'right') {
+		if (direction === 'R') {
 			for (let i = indices.length - 1; i >= 0; i--) {
 				let newIndex = indices[i] + steps;
 				if (newIndex > result.length - 1) newIndex = result.length - 1;
 	
 				result.splice(newIndex, 0, result.splice(indices[i], 1)[0]);
 			}
-		} else if (direction === 'left') {
+		} else if (direction === 'L') {
 			for (let i = 0; i < indices.length; i++) {
 				let newIndex = indices[i] - steps;
 				if (newIndex < 0) newIndex = 0;
 	
 				result.splice(newIndex, 0, result.splice(indices[i], 1)[0]);
 			}
-		} else {
-			throw new Error('Direction must be either "left" or "right"');
 		}
 	
 		return result.join('');

@@ -21,12 +21,12 @@ function App() {
         return
       }
       const instance = new StringManipulations[activeClass]()
-  
+
       const argTypes = functionArguments[activeSubmenuClass]
-  
+
       // first argument is always the input
       const methodArgs = [input]
-  
+
       argTypes.forEach((arg, index) => {
         if (arg !== 'string' && arg !== 'length' && arg !== 'steps') {
           methodArgs.push(args[index] || '') // Push the additionals arguments to the array
@@ -35,18 +35,17 @@ function App() {
           methodArgs.push(parseInt(args[index]) || 0) // Pass an int if the function takes that
         }
       })
-  
+
       // call the selected method with the prepared arguments
       try {
         const result = instance[activeSubmenuClass](...methodArgs)
         setResult(result)
       } catch (error) {
-        alert(error.message);
+        alert(error.message)
       }
     } catch (error) {
-      alert(error.message);
+      alert(error.message)
     }
-   
   }
 
   // Toggle the active class of the sidebar buttons
@@ -80,6 +79,16 @@ function App() {
     })
   }
 
+  function camelCaseToRegularCase(text) {
+    return text
+      .replace(/([A-Z])/g, ' $1')
+      .replace(/^./, function (string) {
+        return string.toUpperCase()
+      })
+      .trim()
+      .toLowerCase()
+  }
+
   return (
     <div className='App'>
       <div className='sidebar'>
@@ -91,7 +100,7 @@ function App() {
                 activeClass === className ? 'active' : ''
               }`}
             >
-              {className}
+              {camelCaseToRegularCase(className)}
             </button>
             <div
               className={`submenu ${activeClass === className ? 'active' : ''}`}
@@ -111,7 +120,7 @@ function App() {
                       activeSubmenuClass === method ? 'active' : ''
                     }`}
                   >
-                    {method}
+                    {camelCaseToRegularCase(method)}
                   </button>
                 ))}
             </div>
@@ -119,7 +128,6 @@ function App() {
         ))}
       </div>
       <div className='main-content'>
-
         <div className='input-section'>
           <textarea
             value={input}
@@ -144,7 +152,7 @@ function App() {
                         onChange={(e) =>
                           handleArgChange(index + 1, e.target.value)
                         }
-                        placeholder={`Enter ${argType} here...`}
+                        placeholder={`Enter ${camelCaseToRegularCase(argType)}`}
                       />
                     )
                 )}
