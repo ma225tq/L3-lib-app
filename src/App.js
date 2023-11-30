@@ -13,7 +13,6 @@ function App() {
     setInput(e.target.value)
   }
 
-  // Submit the input to the selected function when user clicks the submit button
   const handleSubmit = () => {
     try {
       if (!activeSubmenuClass) {
@@ -24,7 +23,7 @@ function App() {
 
       const methodArgs = getArgs()
 
-      // call the selected method with the prepared arguments
+      // Call the selected method with the prepared arguments
       try {
         const result = instance[activeSubmenuClass](...methodArgs)
         setResult(result)
@@ -39,33 +38,30 @@ function App() {
   const getArgs = () => {
     const argTypes = functionArguments[activeSubmenuClass]
 
-      // first argument is always the input
-      const methodArgs = [input]
+    // First argument is always the input
+    const methodArgs = [input]
 
-      argTypes.forEach((arg, index) => {
-        if (arg !== 'string' && arg !== 'length' && arg !== 'steps') {
-          methodArgs.push(args[index] || '') // Push the additionals arguments to the array
-        }
-        if (arg === 'length' || arg === 'steps') {
-          methodArgs.push(parseInt(args[index]) || 0) // Pass an int if the function takes that
-        }
-      })
+    argTypes.forEach((arg, index) => {
+      if (arg !== 'string' && arg !== 'length' && arg !== 'steps') {
+        methodArgs.push(args[index] || '') // Push the additionals arguments to the array
+      }
+      if (arg === 'length' || arg === 'steps') {
+        methodArgs.push(parseInt(args[index]) || 0) // Pass an int if the function takes that
+      }
+    })
 
-      return methodArgs
+    return methodArgs
   }
-
-  // Toggle the active class of the sidebar buttons
 
   const toggleClass = (className) => {
     setActiveClass(activeClass === className ? '' : className)
   }
 
-  // Toggle the active class of the submenu buttons
   const toggleSubmenuClass = (method) => {
     setActiveSubmenuClass(activeSubmenuClass === method ? '' : method)
   }
 
-  // set the arguments the function takes, from a predefined object
+  // Set the arguments the function takes, from a predefined object
 
   const handleFunctionSelection = (selectedMethod) => {
     if (functionArguments.hasOwnProperty(selectedMethod)) {
@@ -75,7 +71,7 @@ function App() {
     }
   }
 
-  // handle the change of the additional arguments as the user inputs them
+  // Handle the change of the additional arguments as the user inputs them
 
   const handleArgChange = (index, newValue) => {
     setArgs((prevArgs) => {
