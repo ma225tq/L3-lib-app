@@ -57,6 +57,8 @@ Testen ska hålla lika hög kodkvalitet som resten av koden och varje test ska e
 
 Enligt "F.I.R.S.T" ska testen vara fast, independent, repeateable och self-validating.
 
+Mina tester efterföljer detta rätt bra, de testar endast en sak per test, de är oberoende genom att jag skapar ett nytt objekt innan varje test. [Exempel](./img/Screenshot%202023-11-30%20at%2023.17.43.png)
+
 # Kapitel 10 - Classes
 
 Klasser ska ha besläktade metoder nära varandra. Metoder ska endast vara publika om det är absolut nödvändigt. Klasserna ska vara så små som möjligt och endast vara beroende av abstraktioner, inte konkreta implementationer.
@@ -69,6 +71,6 @@ Att bygga ett system är en annan sak än att använda det.
 
 Använd oo-principer såsom dependency injection i en main-metod eller factories för att skapa komponenterna till systemet. Detta ger bättre kontroll över olika komponenters livscykler.
 
-Håll olika ansvarsområden separerade och se till att systemet är skalbart.
+Håll olika ansvarsområden separerade och se till att systemet är skalbart. Återigen är det inget min applikation direkt efterföljer. Jag tänkte inte på att även appen skulle vara objektorienterad, så behöver jag skriva om den så blir det en mer MVC-liknande struktur med webbkomponenter och klasser.
 
 
