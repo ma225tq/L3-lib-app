@@ -4,9 +4,7 @@ export class CaseChanger {
 	#remover = new Remover();
 
 	convertToCamelCase(string) {
-		if (typeof string !== 'string') {
-			throw new Error('Input must be a string');
-		}
+		this.#validateInput(string);
 		string = this.#remover.removeSpecialChars(string);
 		return string
 			.split(' ')
@@ -20,25 +18,19 @@ export class CaseChanger {
 	}
 
 	convertToKebabCase(string) {
-		if (typeof string !== 'string') {
-			throw new Error('Input must be a string');
-		}
+		this.#validateInput(string);
 		string = this.#remover.removeSpecialChars(string);
 		return string.replace(/\s/g, '-').toLowerCase();
 	}
 
 	convertToSnakeCase(string) {
-		if (typeof string !== 'string') {
-			throw new Error('Input must be a string');
-		}
+		this.#validateInput(string);
 		string = this.#remover.removeSpecialChars(string);
 		return string.replace(/\s/g, '_').toLowerCase();
 	}
 
 	convertToTitleCase(string) {
-		if (typeof string !== 'string') {
-			throw new Error('Input must be a string');
-		}
+		this.#validateInput(string);
 
 		// articles, conjunctions, and prepositions shorter than 6 letters
 
@@ -108,5 +100,11 @@ export class CaseChanger {
 		}
 
 		return words.join(' ');
+	}
+
+	#validateInput(string) {
+		if (typeof string !== 'string') {
+			throw new Error('Input must be a string');
+		}
 	}
 }

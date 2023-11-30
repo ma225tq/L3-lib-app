@@ -1,14 +1,7 @@
 export class Remover {
 	removeChar(string, charToRemove) {
-		if (typeof string !== 'string') {
-			throw new Error('string must be a string');
-		}
-		if (typeof charToRemove !== 'string') {
-			throw new Error('charToRemove must be a string');
-		}
-		if (charToRemove.length !== 1) {
-			throw new Error('charToRemove must be a single character');
-		}
+
+		this.#validateInputForRemoveChar(string, charToRemove);
 
 		let manipulatedString = '';
 
@@ -22,20 +15,33 @@ export class Remover {
 	}
 
 	removeLineBreaks(string) {
+		this.#validateInput(string);
 		return string.replace(/\r?\n|\r/g, ' ');
 	}
 
 	removeSpecialChars(string) {
-		if (typeof string !== 'string') {
-			throw new Error('Input must be a string');
-		}
+		this.#validateInput(string);
 		return string.replace(/[^\w\s]/gi, '');
 	}
 
 	removeWhiteSpaces(string) {
+		this.#validateInput(string);
+		return string.replace(/\s/g, '');
+	}
+
+	#validateInputForRemoveChar(string, charToRemove) {
 		if (typeof string !== 'string') {
 			throw new Error('Input must be a string');
 		}
-		return string.replace(/\s/g, '');
+
+		if (typeof charToRemove !== 'string') {
+			throw new Error('Character to remove must be a string');
+		}
+	}
+
+	#validateInput(string) {
+		if (typeof string !== 'string') {
+			throw new Error('Input must be a string');
+		}
 	}
 }

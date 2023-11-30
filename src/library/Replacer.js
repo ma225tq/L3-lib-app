@@ -1,6 +1,23 @@
 export class Replacer {
    
 	replaceChar(string, charToReplace, newChar) {
+
+		this.#validateInputForReplaceChar(string, charToReplace, newChar);
+
+		let manipulatedString = '';
+    
+		for (let i = 0; i < string.length; i++) {
+			if (charToReplace.includes(string[i])) {
+				manipulatedString += newChar;
+			} else {
+				manipulatedString += string[i];
+			}
+		}
+    
+		return manipulatedString;
+	}
+
+	#validateInputForReplaceChar(string, charToReplace, newChar) {
 		if (typeof string !== 'string') {
 			throw new Error('string must be a string');
 		}
@@ -25,18 +42,6 @@ export class Replacer {
 		if (newChar.length !== 1) {
 			throw new Error('newChar must be a single character');
 		}
-    
-		let manipulatedString = '';
-    
-		for (let i = 0; i < string.length; i++) {
-			if (charToReplace.includes(string[i])) {
-				manipulatedString += newChar;
-			} else {
-				manipulatedString += string[i];
-			}
-		}
-    
-		return manipulatedString;
 	}
 
     

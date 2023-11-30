@@ -1,6 +1,11 @@
 export class Truncater {
 
 	truncate(string, length) {
+		this.#validateInput(string, length);
+		return string.slice(0, length) + '...';
+	}
+
+	#validateInput(string, length) {
 		if (typeof string !== 'string') {
 			throw new Error('Input must be a string');
 		}
@@ -10,22 +15,12 @@ export class Truncater {
 		if (length <= 0) {
 			throw new Error('Length must be a positive number');
 		}
-	
-		let charCount = 0;
-        let truncatedString = '';
-
-        for (let char of string) {
-            if (charCount >= length) break;
-            truncatedString += char;
-            if (char !== ' ') charCount++;
-        }
-
-        return truncatedString.trimEnd() + '...';
-    }
+		if (length >= string.length) {
+			return string + '...';
+		}
 	}
 
-
-
+}
 
 
 
