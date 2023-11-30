@@ -6,12 +6,8 @@ Det ska finnas val för hur man vill formatera sin text.
 
 Det ska finnas val för hur man vill manipulera sin text.
 
-Det ska finnas ett fält för output.
-
 # Icke-funktionella krav
 
 Användarvänlighet: det ska vara ett enkelt gränssnitt med fokus på in- och output.
 
 Skalbarhet: Det ska vara lätt att lägga till nya funktioner för manipulering eller formatering.
-
-Koden ska vara skriven enligt principerna i Clean code.
