@@ -24,12 +24,9 @@ function App() {
       const methodArgs = getArgs()
 
       // Call the selected method with the prepared arguments
-      try {
         const result = instance[activeSubmenuClass](...methodArgs)
         setResult(result)
-      } catch (error) {
-        alert(error.message)
-      }
+
     } catch (error) {
       alert(error.message)
     }
