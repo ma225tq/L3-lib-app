@@ -63,7 +63,7 @@ Mina tester efterföljer detta rätt bra, de testar endast en sak per test, de �
 
 Klasser ska ha besläktade metoder nära varandra. Metoder ska endast vara publika om det är absolut nödvändigt. Klasserna ska vara så små som möjligt och endast vara beroende av abstraktioner, inte konkreta implementationer.
 
-"Open-Closed Principle": Klasser ska kunna utökas utan att ändra befintlig kod.
+"Open-Closed Principle": Klasser ska kunna utökas utan att ändra befintlig kod. Detta tycker jag att klasserna i biblioteket efterföljer. Varje metod är specifik och påverkar inte något som den inte bör.
 
 # Kapitel 11 - Systems
 
