@@ -1,6 +1,6 @@
 # Kapitel 2 & 3
 
-Reflektioner finns i repot för biblioteket.
+[Reflektioner finns i repot för biblioteket.](https://github.com/ma225tq/stringManipulationLib/blob/L2/reflektion.md)
 
 # Kapitel 4 - Kommentarer
 
@@ -8,7 +8,7 @@ Författaren menar att kommentarer ofta används för att kompensera för dålig
 
 Om man ändå känner att kommentarer behövs ska de ge kontext eller motivation till att man gör en viss sak i koden, och inte vara upprepande eller uppenbara.
 
-Ett exempel på ett ställe där jag känner att kommentarerna tillför något är: img/Screenshot 2023-11-30 at 20.18.19.png
+[Ett exempel på ett ställe där jag känner att kommentarerna tillför något.](./img/Screenshot%202023-11-30%20at%2020.18.19.png)
 
 Har man inte sett mitt bibliotek är det inte självklart att första argumentet alltid ska vara en sträng, eller att vissa funktioner kräver en int.
 
@@ -16,14 +16,13 @@ Har man inte sett mitt bibliotek är det inte självklart att första argumentet
 
 Kod ska kunna läsas uppifrån och ner, som en tidningsartikel. ("The newspaper metaphor")
 
-Det bör finnas tomrum mellan olika koncept, medan sammanhängande koncept ska vara nära. Ett exempel på detta är 
-img/Screenshot 2023-11-30 at 20.27.37.png, där funktionen anropar en hjälpfunktion som ligger direkt under.
+Det bör finnas tomrum mellan olika koncept, medan sammanhängande koncept ska vara nära. [Ett exempel på detta.](./img/Screenshot%202023-11-30%20at%2020.27.37.png), där funktionen anropar en hjälpfunktion som ligger direkt under.
 
 # Kapitel 6 - Objects and data structures
 
 "The law of demeter": metod *f* från klass *C* ska endast anropa metoder i *C* eller objekt skapade av *C*.
 
-"Train wrecks" är när man kör funktionsanrop på funktionsanrop på en variabel. img/Screenshot 2023-11-30 at 20.37.07.png är ett utmärkt exempel på kod som bryter helt mot denna regel. Mitt rättfärdigande är att det inte är svårt att förstå vad denna funktion gör utifrån namnet, och det finns ingen anledning till att modifiera den i framtiden eller överblicka varenda rad på en sekund. Vill man modifiera den så skulle den inte längre uppfylla sitt syfte och då kan man lika gärna ta bort den och / eller skapa en ny funktion. Det hade blivit många fler rader kod och en massa upprepningar av variabelnamnet om man inte skrev den som ett "train wreck". Men i andra fall undviker jag det.
+"Train wrecks" är när man kör funktionsanrop på funktionsanrop på en variabel. [Ett utmärkt exempel på kod som bryter helt mot denna regel](./img/Screenshot%202023-11-30%20at%2020.37.07.pn). Mitt rättfärdigande är att det inte är svårt att förstå vad denna funktion gör utifrån namnet, och det finns ingen anledning till att modifiera den i framtiden eller överblicka varenda rad på en sekund. Vill man modifiera den så skulle den inte längre uppfylla sitt syfte och då kan man lika gärna ta bort den och / eller skapa en ny funktion. Det hade blivit många fler rader kod och en massa upprepningar av variabelnamnet om man inte skrev den som ett "train wreck". Men i andra fall där det finns behov av att förstå koden i framtiden undviker jag det.
 
 # Kapitel 7 - Error Handling
 
