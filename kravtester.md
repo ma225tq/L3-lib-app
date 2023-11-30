@@ -1,0 +1,5 @@
+| Testfall-ID | Krav                              | Testfallsbeskrivning                                                   | Förväntat Resultat                                   | Godkänd/Ej Godkänd |
+|-------------|-----------------------------------|------------------------------------------------------------------------|------------------------------------------------------|--------------------|
+| TC-01       | Det ska finnas ett fält för textinput.               | Skriv text i textinmatningsfältet                                      | Texten visas i inmatningsfältet som skrivet          |                    |
+| TC-02       | Det ska finnas val för hur man vill formatera sin text.           | Välj ett formateringsalternativ och tillämpa på texten | Texten i fältet för output har formaterats enligt valet       |                    |
+| TC-03       | Det ska finnas val för hur man vill manipulera sin text.          | Välj ett alternativ för textmanipulering och tillämpa på texten | Texten i fältet för output är manipulerad enligt valet         |                    |          |

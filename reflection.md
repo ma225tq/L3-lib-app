@@ -29,9 +29,9 @@ img/Screenshot 2023-11-30 at 20.27.37.png, där funktionen anropar en hjälpfunk
 
 Felhantering är viktigt men den ska inte vara i vägen för att man ska kunna förstå kodlogiken.
 
-Använd undantag med kontext istället för att returnera felkoder.
+Kasta undantag med kontext istället för att returnera felkoder.
 
-fixa bibliotek!!
+I första versionen av mitt bibliotek hade jag felhantering i samma metoder som skulle manipulera inputen vilket gör logiken otydlig och metoderna väldigt långa. Jag har löst det genom att skapa privata metoder för att validera inputen i varje klass. Det är inte perfekt då det finns viss upprepning mellan de olika klasserna (t.ex har många klasser en metod som bara validerar att inputen är en sträng) men jag föredrog ändå detta istället för att skapa en ny klass för felhantering då detta skulle kunna vara mer förvirrande för användaren av mitt biblitotek.
 
 # Kapitel 8 - Boundaries
 
